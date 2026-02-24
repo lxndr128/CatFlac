@@ -1,5 +1,7 @@
-require 'json'
-require 'net/http'
+# frozen_string_literal: true
+
+require "json"
+require "net/http"
 
 module CatFlac
   module Parsers
@@ -8,7 +10,7 @@ module CatFlac
         PROMPT = <<-TEXT
           You are a music metadata expert. Use MusicBrainz or Discogs, and ONLY in case you can't find
           anything there use another sources.
-          
+
           1. Identify the album or albums from these files
           2. Find the EXACT official tracklist with durations (MM:SS:FF format)
           3. Match files to tracks by order and duration
@@ -17,40 +19,41 @@ module CatFlac
           6. Check output json on syntax errors.
           7. Be carefull, some releases could be described as one big track, but still contain a few different tracks inside.
              We want to split it anyway, don't care about artistic obstacles
-  
+
         TEXT
 
         RESPONSE_SCHEMA = {
           albums: [
             {
-              source_file: { type: 'string', description: 'Relative path to the music file' },
-              title: { type: 'string' },
-              artist: { type: 'string' },
-              cover: { type: 'string', description: 'Relative path to the cover file' },
-              genre: { type: 'string' },
-              release_date: { type: 'string' },
+              source_file: { type: "string", description: "Relative path to the music file" },
+              title: { type: "string" },
+              artist: { type: "string" },
+              cover: { type: "string", description: "Relative path to the cover file" },
+              genre: { type: "string" },
+              release_date: { type: "string" },
               tracks: [
                 {
-                  cover: { type: ['string', 'null'], description: 'Only in case of separate covers for each track' },
-                  number: { type: 'string' },
-                  title: { type: 'string' },
-                  artist: { type: 'string' },
-                  duration: { type: 'string (CUE format 75 frames)', format: "mm:ss:ff" },
+                  cover: { type: %w[string null], description: "Only in case of separate covers for each track" },
+                  number: { type: "string" },
+                  title: { type: "string" },
+                  artist: { type: "string" },
+                  duration: { type: "string (CUE format 75 frames)", format: "mm:ss:ff" }
                 }
               ]
             }
           ]
-        }
+        }.freeze
 
         module_function
-        def make_request(files, formats)
-          return JSON.parse(File.read('mock.json')) if File.exist?('mock.json')
 
-          uri = URI('https://api.perplexity.ai/v1/responses')
+        def make_request(files, formats)
+          return JSON.parse(File.read("mock.json")) if File.exist?("mock.json")
+
+          uri = URI("https://api.perplexity.ai/v1/responses")
 
           request = Net::HTTP::Post.new(uri)
-          request['Authorization'] = "Bearer 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"
-          request['Content-Type'] = 'application/json'
+          request["Authorization"] = "Bearer #{ENV.fetch('AI_API_KEY', nil)}"
+          request["Content-Type"] = "application/json"
 
           request.body = body(files, formats).to_json
 
@@ -63,7 +66,7 @@ module CatFlac
           end
 
           text = JSON.parse(response.body).dig("output", -1, "content", -1, "text")
-          JSON.parse(text)['albums']
+          JSON.parse(text)["albums"]
         rescue JSON::ParserError => e
           raise ParserError, "Failed to parse AI response: #{e.message}"
         rescue Net::HTTPError, SocketError, Timeout::Error => e
@@ -71,7 +74,7 @@ module CatFlac
         end
 
         def body(files, formats)
-          content =  PROMPT + "\nFILES:\n" + files + "\nMETADATA:\n" + formats + "Respone shema" + RESPONSE_SCHEMA.to_json
+          content = "#{PROMPT}\nFILES:\n#{files}\nMETADATA:\n#{formats}Respone shema#{RESPONSE_SCHEMA.to_json}"
           {
             input: [
               {
@@ -86,7 +89,7 @@ module CatFlac
               {
                 type: "web_search",
                 filters: {
-                  search_domain_filter: ["musicbrainz.org", "discogs.com", "youtube.com"],
+                  search_domain_filter: ["musicbrainz.org", "discogs.com", "youtube.com"]
                 }
               }
             ]
@@ -96,6 +99,3 @@ module CatFlac
     end
   end
 end
-
-#require_relative 'lib/CatFlac'
-#CatFlac.cat!('test')

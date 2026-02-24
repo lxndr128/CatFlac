@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module CatFlac
   module Parsers
     module Builders
       module AiAlbumBuilder
         module_function
+
         def make_album(album_data)
           album = CatFlac::Album.new(
             title: album_data["title"],
@@ -15,12 +18,12 @@ module CatFlac
 
           start_time = 0
 
-          album_data['tracks'].each_with_index do |track_data, index|
-            duration = Helpers.time_to_seconds(track_data['duration'])
+          album_data["tracks"].each_with_index do |track_data, index|
+            duration = Helpers.time_to_seconds(track_data["duration"])
 
             track = CatFlac::Track.new(
               album: album_data["title"],
-              number: (track_data["number"] || index + 1).to_i,
+              number: (track_data["number"] || (index + 1)).to_i,
               title: track_data["title"],
               artist: track_data["artist"],
               start_time: start_time,

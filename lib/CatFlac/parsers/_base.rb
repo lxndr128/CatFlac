@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CatFlac
   module Parsers
     class Base
@@ -10,6 +12,7 @@ module CatFlac
       ].freeze
 
       attr_reader :path
+
       def self.parse(target_folder_path:)
         @path = target_folder_path
         select_parser.new(target_folder_path).parse

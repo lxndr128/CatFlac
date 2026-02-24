@@ -1,4 +1,6 @@
-require 'pry-byebug'
+# frozen_string_literal: true
+
+require "pry-byebug"
 
 module CatFlac
   class Splitter
@@ -7,7 +9,7 @@ module CatFlac
       ext = File.extname(album.source_file)
 
       album.tracks.each do |track|
-        output_file = File.join(album.title, "#{track.filename + ext}")
+        output_file = File.join(album.title, (track.filename + ext).to_s)
 
         cmd = [
           "ffmpeg",
@@ -15,9 +17,7 @@ module CatFlac
           "-i", album.source_file
         ]
 
-        if album.cover
-          cmd += ["-i", album.cover]
-        end
+        cmd += ["-i", album.cover] if album.cover
 
         cmd += [
           "-ss", track.start_time.to_s,

@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module CatFlac
   module Parsers
     module Builders
       module CueAlbumBuilder
         module_function
+
         def make_album(cuesheet, audio_path, path)
           album = CatFlac::Album.new(
             title: cuesheet.title,
@@ -20,11 +23,11 @@ module CatFlac
             next_song = cuesheet.songs[index + 1]
             end_time = Helpers.time_to_seconds(next_song&.[](:index) || total_duration)
             duration = end_time - start_time
-            duration = 0 if duration < 0
+            duration = 0 if duration.negative?
 
             track = CatFlac::Track.new(
               album: album,
-              number: (song_data[:track] || index + 1).to_i,
+              number: (song_data[:track] || (index + 1)).to_i,
               title: song_data[:title],
               artist: song_data[:performer],
               start_time: start_time,

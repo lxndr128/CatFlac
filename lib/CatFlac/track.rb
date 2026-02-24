@@ -1,4 +1,4 @@
-
+# frozen_string_literal: true
 
 module CatFlac
   class Track
@@ -16,7 +16,7 @@ module CatFlac
     end
 
     def filename
-      safe_title = title.gsub(/[\/\\]/, '-')
+      safe_title = title.gsub(%r{[/\\]}, "-")
       "#{number.to_s.rjust(2, '0')}. #{artist} - #{safe_title}"
     end
   end

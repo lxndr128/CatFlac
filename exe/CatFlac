@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-require "CatFlac"
+require "cat_flac"
 require "thor"
 class CatFlacCLI < Thor
   def split(file_path)

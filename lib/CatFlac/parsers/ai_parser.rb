@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module CatFlac
   module Parsers
     class AIParser < Base
       ORDER = 3
 
       def self.match?(path)
-        return false unless ENV['AI_API_KEY']
+        return false unless ENV["AI_API_KEY"]
 
         Dir.glob(File.join(path, "*.{#{AUDIO_EXTENSIONS.join(',')}}")).any?
       end

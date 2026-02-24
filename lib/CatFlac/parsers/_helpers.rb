@@ -1,15 +1,18 @@
+# frozen_string_literal: true
+
 module CatFlac
   module Parsers
     module Helpers
       module_function
+
       def read_cue_content(cue_path)
-        File.read(cue_path, encoding: 'UTF-8')
+        File.read(cue_path, encoding: "UTF-8")
       rescue Encoding::InvalidByteSequenceError, Encoding::UndefinedConversionError
-        File.read(cue_path, encoding: 'Windows-1251').encode('UTF-8')
+        File.read(cue_path, encoding: "Windows-1251").encode("UTF-8")
       end
 
       def get_audio_duration(path)
-        require 'streamio-ffmpeg'
+        require "streamio-ffmpeg"
         duration = FFMPEG::Movie.new(path).duration
         Time.at(duration).utc.strftime("%M:%S:%L")
       rescue StandardError => e
@@ -20,14 +23,14 @@ module CatFlac
         time_str = time.to_s
         return if time_str.empty?
 
-        minutes, seconds, frames = time_str.split(':').map(&:to_i)
+        minutes, seconds, frames = time_str.split(":").map(&:to_i)
 
         (minutes * 60) + seconds + (frames / 75.0)
       end
 
       def find_cover(extensions, path)
         imgs = Dir.glob(File.join(path, "*.{#{extensions.join(',')}}"))
-        return unless imgs.count == 1
+        return unless imgs.one?
 
         imgs.first
       end

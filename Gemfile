@@ -5,8 +5,8 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in CatFlac.gemspec
 gemspec
 
-gem "pry-byebug"
 gem "irb"
+gem "pry-byebug"
 gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"
 

@@ -1,4 +1,6 @@
-require_relative '../../../vendor/rubycue-master/lib/rubycue'
+# frozen_string_literal: true
+
+require_relative "../../../vendor/rubycue-master/lib/rubycue"
 
 module CatFlac
   module Parsers
@@ -6,9 +8,9 @@ module CatFlac
       ORDER = 0
 
       def self.match?(path)
-        return false unless Dir.glob(File.join(path, "*.cue")).count == 1
+        return false unless Dir.glob(File.join(path, "*.cue")).one?
 
-        Dir.glob(File.join(path, "*.{#{AUDIO_EXTENSIONS.join(',')}}")).count == 1
+        Dir.glob(File.join(path, "*.{#{AUDIO_EXTENSIONS.join(',')}}")).one?
       end
 
       def initialize(path)
@@ -16,7 +18,7 @@ module CatFlac
         cue_path = Dir.glob(File.join(path, "*.cue")).first
         @audio_path = Dir.glob(File.join(path, "*.{#{AUDIO_EXTENSIONS.join(',')}}")).first
         begin
-          @cuesheet = ::RubyCue::Cuesheet.new(Helpers.read_cue_content(cue_path)).tap {|c| c.parse! }
+          @cuesheet = ::RubyCue::Cuesheet.new(Helpers.read_cue_content(cue_path)).tap(&:parse!)
         rescue StandardError => e
           raise ParserError, "Failed to parse cuesheet #{cue_path}: #{e.message}"
         end

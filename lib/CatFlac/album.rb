@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module CatFlac
   class Album
     attr_reader :title, :artist, :year, :source_file, :tracks, :release_date, :cover
 
-    def initialize(title:, artist:, source_file: nil, cover:, release_date:, genre:, tracks: [])
+    def initialize(title:, artist:, cover:, release_date:, genre:, source_file: nil, tracks: [])
       @title = title
       @artist = artist
       @source_file = source_file
