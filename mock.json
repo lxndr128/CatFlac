@@ -1,0 +1,33 @@
+[
+  {
+    "source_file": "test2/01-dead_can_dance-act_i_sea_borne_-_liberator_of_minds_-_dance_of_the_bacchantes.flac",
+    "title": "Dionysus",
+    "artist": "Dead Can Dance",
+    "cover": null,
+    "genre": "Alternative",
+    "release_date": "2018-11-02",
+    "tracks": [
+      {
+        "cover": null,
+        "number": "1",
+        "title": "ACT I : Sea Borne",
+        "artist": "Dead Can Dance",
+        "duration": "06:44:07"
+      },
+      {
+        "cover": null,
+        "number": "2",
+        "title": "ACT I : Liberator of Minds",
+        "artist": "Dead Can Dance",
+        "duration": "05:20:15"
+      },
+      {
+        "cover": null,
+        "number": "3",
+        "title": "ACT I : Dance of the Bacchantes",
+        "artist": "Dead Can Dance",
+        "duration": "04:37:04"
+      }
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "CatFlac"
+require "thor"
+class CatFlacCLI < Thor
+  def split(file_path)
+    cat!(file_path)
+  end
+end
+
+CatFlacCLI.start(ARGV)
