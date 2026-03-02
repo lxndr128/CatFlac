@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../../../vendor/rubycue-master/lib/rubycue"
+require_relative "../../vendor/rubycue-master/lib/rubycue"
 
 module CatFlac
   module Parsers

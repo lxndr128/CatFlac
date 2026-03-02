@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "pry-byebug"
+require "fileutils"
 
 module CatFlac
   class Splitter
