@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "cat_flac"
+require "thor"
+class CatFlacCLI < Thor
+  def self.exit_on_failure?
+    true
+  end
+  desc "cat FILE_PATH", "Split a FLAC file on tracks"
+  def cat(file_path)
+    CatFlac.cat!(file_path)
+  end
+
+  desc "cut FILE_PATH", "Split a FLAC file on tracks"
+  alias_method :cut, :cat
+
+  desc "split FILE_PATH", "Split a FLAC file on tracks"
+  alias_method :split, :cat
+end
+
+CatFlacCLI.start(ARGV)

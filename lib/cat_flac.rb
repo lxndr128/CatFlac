@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-Dir["lib/CatFlac/**/*.rb"].each { |file| require_relative "../#{file}" }
-require "pry-byebug"
+Dir[File.join(__dir__, "CatFlac/**/*.rb")].sort.each { |file| require file }
+
 module CatFlac
   class Error < StandardError; end
   class ParserError < Error; end
