@@ -2,7 +2,7 @@ AllCops:
   TargetRubyVersion: 3.1
   NewCops: enable
   Exclude:
-    - 'vendor/**/*'
+    - 'lib/CatFlac/vendor/**/*'
     - 'tmp/**/*'
     - 'node_modules/**/*'
     - 'db/schema.rb'

@@ -12,4 +12,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.exclude_pattern = "lib/CatFlac/vendor/**/*_spec.rb"
 end

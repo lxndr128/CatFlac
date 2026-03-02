@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    CatFlac (0.1.0)
+    CatFlac (0.0.1)
       streamio-ffmpeg (~> 3.0)
       thor (~> 1.3)
 

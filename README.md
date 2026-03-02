@@ -38,11 +38,14 @@ Or add this to your application's `Gemfile`:
 gem 'CatFlac'
 ```
 
-And then run:
+Then run:
 ```bash
 bundle install
 ```
-
+And if you use rbenv:
+```bash
+rbenv rehash
+```
 ##   Usage
 
 Using CatFlac is pretty straightforward.
@@ -52,7 +55,7 @@ Using CatFlac is pretty straightforward.
 Just point CatFlac to a folder containing your audio files:
 
 ```bash
-CatFlac split /path/to/your/music_folder
+catflac cat /path/to/your/music_folder
 ```
 
 ### Ruby API
@@ -72,7 +75,7 @@ If you don't have a CUE sheet, you can try letting CatFlac guess the tracks. To 
 ```bash
 export AI_API_KEY='api_key_here'
 
-CatFlac split /path/to/mysterious_album
+catflac cat /path/to/mysterious_album
 ```
 
 ##  Contributing
