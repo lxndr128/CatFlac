@@ -5,12 +5,12 @@ require_relative "lib/CatFlac/version"
 Gem::Specification.new do |spec|
   spec.name = "CatFlac"
   spec.version = CatFlac::VERSION
-  spec.authors = ["Alex Acht"]
-  spec.email = ["aakh@level.travel"]
+  spec.authors = ["Aleksandr Akhtyrskii"]
+  spec.email = ["alexakhtyrskii@gmail.com"]
 
-  spec.summary = "A simple cat-themed tool for splitting lossless audio files."
-  spec.description = "CatFlac is a feline-inspired utility that helps you split large lossless audio files into tracks using CUE sheets or experimental AI identification. Still in early development."
-  spec.homepage = "https://github.com/lxndr128"
+  spec.summary = "A simple tool for splitting lossless audio files."
+  spec.description = "CatFlac is an utility that helps you split large lossless audio files into tracks using CUE sheets or experimental AI identification. Still in early development."
+  spec.homepage = "https://github.com/lxndr128/CatFlac"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
